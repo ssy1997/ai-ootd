@@ -1,0 +1,21 @@
+<!-- 穿搭历史页面 -->
+<view class="outfit-history-page">
+  <navigation-bar title="穿搭历史" />
+
+  <scroll-view class="outfit-history-page__scroll" scroll-y bindscrolltolower="onReachBottom">
+    <view class="outfit-history-page__list">
+      <view class="outfit-history-page__item" wx:for="{{outfitList}}" wx:key="_id" bindtap="handleOutfitTap" data-outfit="{{item}}">
+        <outfit-display outfit="{{item}}" compact="{{true}}" />
+        <text class="outfit-history-page__date">{{formatDate(item.date)}}</text>
+      </view>
+    </view>
+
+    <view class="outfit-history-page__empty" wx:if="{{!loading && outfitList.length === 0}}">
+      <text>暂无穿搭历史</text>
+    </view>
+
+    <view class="outfit-history-page__loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+</view>

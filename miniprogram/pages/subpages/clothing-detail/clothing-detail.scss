@@ -1,0 +1,136 @@
+@import '../../../styles/variables.scss';
+
+.clothing-detail-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-base;
+}
+
+navigation-bar {
+  flex-shrink: 0;
+}
+
+.clothing-detail-page__body {
+  flex: 1;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.clothing-detail-page__content {
+  padding: 30rpx 40rpx;
+}
+
+// 图片区域
+.clothing-detail-page__image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: $radius-large;
+  overflow: hidden;
+  box-shadow: $shadow-glass;
+  margin-bottom: 30rpx;
+  background-color: #FFFFFF;
+}
+
+.clothing-detail-page__image {
+  width: 100%;
+  height: 800rpx;
+  display: block;
+}
+
+// 卡片化信息区块
+.clothing-detail-page__card {
+  background-color: #FFFFFF;
+  border-radius: $radius-large;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: $shadow-glass;
+}
+
+.clothing-detail-page__info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid $color-divider;
+  &:last-child { border-bottom: none; }
+}
+
+.clothing-detail-page__label { font-size: 28rpx; color: $color-text-sub; }
+.clothing-detail-page__value { font-size: 28rpx; color: $color-text-main; font-weight: 600; }
+
+.clothing-detail-page__tag-section {
+  margin-bottom: 30rpx;
+  &:last-child { margin-bottom: 0; }
+}
+
+.clothing-detail-page__tag-title {
+  font-size: 24rpx;
+  color: $color-text-muted;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.clothing-detail-page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+// 标签优化：改为柔和的高亮胶囊风格
+.clothing-detail-page__tag {
+  background-color: rgba(120, 115, 245, 0.08); // 对齐偏好页胶囊背景
+  color: $color-accent; // 对齐高亮色
+  border: 1rpx solid rgba(120, 115, 245, 0.1);
+  padding: 10rpx 28rpx;
+  border-radius: 100rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+// 底部操作区
+.clothing-detail-page__footer {
+  flex-shrink: 0;
+  padding: 30rpx 40rpx calc(30rpx + env(safe-area-inset-bottom));
+  background-color: #FFFFFF;
+  border-top: 1rpx solid $color-divider;
+}
+
+.clothing-detail-page__btns, 
+.clothing-btns {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn {
+  flex: 1;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 100rpx; // 统一大圆角
+  text-align: center;
+
+  &--primary { 
+    background-color: $color-accent; // 核心按钮切换为高亮色
+    color: #FFFFFF;
+    box-shadow: 0 8rpx 20rpx rgba(120, 115, 245, 0.2);
+  }
+  &--secondary { 
+    background-color: #F5F5F7; 
+    color: $color-text-main; 
+    border: none;
+  }
+  &--danger { 
+    background-color: #FFF; 
+    color: $color-error; 
+    border: 1rpx solid rgba(255, 59, 48, 0.2); 
+  }
+}
+
+.clothing-detail-page__idle-badge {
+  position: absolute;
+  top: 20rpx; right: 20rpx;
+  background-color: $color-error;
+  color: #FFF; padding: 6rpx 20rpx; border-radius: 8rpx; font-size: 22rpx;
+}

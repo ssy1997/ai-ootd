@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.outfit-display {
+  width: 100%;
+}
+
+// 搭配图片网格 - 严格双列自适应布局
+.outfit-display__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; // 确保左右对齐
+  width: 100%;
+}
+
+.outfit-display__item {
+  width: calc(50% - 8rpx); // 留出中间 16rpx 的间隙 (8rpx * 2)
+  height: 0;
+  padding-bottom: calc(50% - 8rpx); // 核心：高度通过 padding 锁定为宽度的 100%
+  position: relative;
+  background-color: #FFFFFF;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-bottom: 16rpx; // 垂直行间距
+}
+
+.outfit-display__image {
+  position: absolute; // 绝对定位填满正方形容器
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+// 紧凑模式适配
+.outfit-display--compact {
+  .outfit-display__item {
+    border-radius: 10rpx;
+    box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.02);
+  }
+}
+
+.outfit-display__worn-status {
+  width: 100%;
+  padding: 10rpx 0;
+  font-size: 22rpx;
+  color: #52C41A;
+  text-align: center;
+  font-weight: 500;
+}

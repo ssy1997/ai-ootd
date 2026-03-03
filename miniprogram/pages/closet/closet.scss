@@ -1,0 +1,148 @@
+@import '../../styles/variables.scss';
+
+.closet-page {
+  min-height: 100vh;
+  background-color: $color-bg-base;
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+.closet-page__header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  @include glass-effect;
+}
+
+.closet-page__content {
+  padding: 24rpx;
+}
+
+.closet-page__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24rpx 0;
+}
+
+clothing-card {
+  width: calc(50% - 12rpx);
+  display: block;
+}
+
+// 悬浮添加按钮：切换为高亮色，增加呼吸感阴影
+.closet-page__add-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: calc(160rpx + env(safe-area-inset-bottom));
+  width: 110rpx;
+  height: 110rpx;
+  background-color: $color-accent;
+  border-radius: 50%;
+  box-shadow: 0 10rpx 30rpx rgba(120, 115, 245, 0.4);
+  z-index: 99;
+  transition: all 0.2s $ease-ios;
+
+  // 使用伪元素实现绝对居中的 + 号
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #FFFFFF;
+    border-radius: 4rpx;
+    transform: translate(-50%, -50%);
+  }
+
+  // 横线
+  &::before {
+    width: 44rpx;
+    height: 4rpx;
+  }
+
+  // 竖线
+  &::after {
+    width: 4rpx;
+    height: 44rpx;
+  }
+
+  &:active { 
+    transform: scale(0.9);
+    box-shadow: 0 4rpx 10rpx rgba(120, 115, 245, 0.2);
+  }
+
+  &--hide {
+    transform: scale(0) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+.closet-page__add-icon, .closet-page__add-svg {
+  display: none;
+}
+
+// 批量操作栏：遵循主题化设计
+.closet-page__batch-bar {
+  position: fixed;
+  bottom: calc(120rpx + env(safe-area-inset-bottom));
+  left: 30rpx;
+  right: 30rpx;
+  height: 100rpx;
+  background-color: #FFFFFF;
+  border-radius: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10rpx 0 40rpx;
+  box-shadow: $shadow-floating;
+  z-index: 200;
+  animation: slideUp 0.3s $ease-ios;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(150rpx); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.closet-page__batch-info {
+  font-size: 26rpx;
+  color: $color-text-main;
+  font-weight: 600;
+}
+
+.closet-page__batch-actions {
+  display: flex;
+  gap: 12rpx;
+}
+
+.closet-page__batch-btn {
+  height: 80rpx;
+  padding: 0 40rpx;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.2s;
+
+  &--cancel {
+    background-color: #F5F5F7;
+    color: $color-text-sub;
+  }
+
+  &--delete {
+    background-color: $color-error;
+    color: #FFFFFF;
+    box-shadow: 0 4rpx 12rpx rgba(255, 59, 48, 0.2);
+  }
+
+  &:active { opacity: 0.8; }
+}
+
+.closet-page__footer {
+  width: 100%;
+  text-align: center;
+  padding: 60rpx 0;
+  font-size: 24rpx;
+  color: $color-text-muted;
+}

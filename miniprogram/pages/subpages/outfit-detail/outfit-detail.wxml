@@ -1,0 +1,65 @@
+<!-- 搭配详情页面 -->
+<view class="outfit-detail-page">
+  <navigation-bar title="搭配详情" />
+
+  <view class="outfit-detail-page__loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <scroll-view class="outfit-detail-page__scroll" scroll-y wx:if="{{outfit}}">
+    <view class="outfit-detail-page__content">
+      
+      <!-- 搭配概览 -->
+      <view class="outfit-detail-page__header">
+        <view class="outfit-detail-page__title">搭配清单</view>
+        <view class="outfit-detail-page__date">{{outfit.dateDisplay}}</view>
+      </view>
+
+      <!-- 单品列表 -->
+      <view class="outfit-detail-page__items">
+        <clothing-card
+          wx:for="{{outfit.items}}"
+          wx:key="_id"
+          clothing="{{item}}"
+          showUseCount="{{false}}"
+          showIdleTag="{{false}}"
+          bindtap="handleClothingTap"
+          data-id="{{item._id}}"
+        />
+      </view>
+
+      <!-- 推荐理由 (XAI) -->
+      <view class="outfit-detail-page__section" wx:if="{{outfit.reason}}">
+        <view class="outfit-detail-page__section-title">AI 推荐理由</view>
+        <view class="outfit-detail-page__reason-box">
+          <text class="outfit-detail-page__reason-text">{{outfit.reason}}</text>
+        </view>
+      </view>
+
+      <!-- 状态统计 -->
+      <view class="outfit-detail-page__section">
+        <view class="outfit-detail-page__section-title">穿搭状态</view>
+        <view class="outfit-detail-page__status-grid">
+          <view class="outfit-detail-page__status-item">
+            <text class="outfit-detail-page__status-label">已收藏</text>
+            <text class="outfit-detail-page__status-value">{{outfit.isFavorited ? '是' : '否'}}</text>
+          </view>
+          <view class="outfit-detail-page__status-item">
+            <text class="outfit-detail-page__status-label">已点赞</text>
+            <text class="outfit-detail-page__status-value">{{outfit.hasLiked ? '是' : '否'}}</text>
+          </view>
+          <view class="outfit-detail-page__status-item">
+            <text class="outfit-detail-page__status-label">穿搭次数</text>
+            <text class="outfit-detail-page__status-value">{{outfit.hasWorn ? '1次' : '0次'}}</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+
+  <!-- 底部删除 -->
+  <view class="outfit-detail-page__footer" wx:if="{{outfit}}">
+    <button class="outfit-detail-page__delete-btn" bindtap="handleDelete">删除此条搭配</button>
+  </view>
+</view>

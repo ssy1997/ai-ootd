@@ -1,0 +1,23 @@
+<!-- 收藏搭配页面 -->
+<view class="favorites-page">
+  <navigation-bar title="收藏搭配" />
+
+  <scroll-view class="favorites-page__scroll" scroll-y>
+    <view class="favorites-page__list">
+      <view class="favorites-page__item" wx:for="{{favoriteList}}" wx:key="_id" bindtap="handleOutfitTap" data-outfit="{{item}}">
+        <outfit-display outfit="{{item}}" compact="{{true}}" />
+        <text class="favorites-page__date">{{formatDate(item.date)}}</text>
+      </view>
+    </view>
+
+    <view class="favorites-page__empty" wx:if="{{!loading && favoriteList.length === 0}}">
+      <text>⭐</text>
+      <text>暂无收藏搭配</text>
+      <text>去推荐页面探索喜欢的穿搭吧</text>
+    </view>
+
+    <view class="favorites-page__loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,26 @@
+<!-- 极简悬浮天气胶囊 -->
+<view 
+  class="weather-widget--minimal" 
+  style="padding-top: {{capsuleTop}}px;"
+>
+  <view 
+    class="weather-widget__content" 
+    style="height: {{capsuleHeight}}px;"
+    bindtap="handleRefresh"
+  >
+    <text class="weather-widget__item weather-widget__city" wx:if="{{cityName}}">{{cityName}}</text>
+    <text class="weather-widget__divider" wx:if="{{cityName}}">·</text>
+    <text class="weather-widget__item">{{weather.temp}}°C</text>
+    <text class="weather-widget__divider">·</text>
+    <text class="weather-widget__item">{{weather.condition}}</text>
+    <text class="weather-widget__icon">{{utils.getWeatherIcon(weather.conditionCode)}}</text>
+  </view>
+
+  <wxs module="utils">
+  module.exports.getWeatherIcon = function(code) {
+    if (code >= 100 && code <= 150) return '☀️';
+    if (code >= 300 && code <= 399) return '🌧️';
+    return '☁️';
+  }
+  </wxs>
+</view>

@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.recommend-page {
+  min-height: 100vh;
+  background-color: #F8F9FA; // 稍微加深底色，衬托顶部的白卡片
+  padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
+}
+
+.recommend-page__header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+}
+
+.recommend-page__messages {
+  padding: 40rpx 0 30rpx; // 增加顶部的留白，避免消息与阴影重叠
+}
+
+.recommend-page__message-list {
+  padding: 0 30rpx 200rpx;
+}
+
+.recommend-page__input-wrapper {
+  position: fixed;
+  bottom: calc(110rpx + env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: #fff;
+  border-top: 1rpx solid #eee;
+}
+
+.recommend-page__loading {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}

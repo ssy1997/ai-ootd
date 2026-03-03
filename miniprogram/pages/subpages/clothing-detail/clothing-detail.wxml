@@ -1,0 +1,92 @@
+<!-- 服饰详情页面 - 全量属性版 -->
+<view class="clothing-detail-page">
+  <navigation-bar title="服饰详情" back="{{true}}" />
+
+  <scroll-view class="clothing-detail-page__body" scroll-y enable-passive>
+    <view class="clothing-detail-page__content" wx:if="{{clothing}}">
+      <!-- 1. 图片区 -->
+      <view class="clothing-detail-page__image-wrapper" bindtap="handlePreviewImage">
+        <image class="clothing-detail-page__image" src="{{clothing.imageUrl}}" mode="aspectFill" />
+        <view class="clothing-detail-page__idle-badge" wx:if="{{clothing.isIdle}}">闲置</view>
+      </view>
+
+      <!-- 2. 基本信息卡片 -->
+      <view class="clothing-detail-page__card">
+        <view class="clothing-detail-page__info-row">
+          <text class="clothing-detail-page__label">名称</text>
+          <text class="clothing-detail-page__value">{{clothing.name}}</text>
+        </view>
+
+        <view class="clothing-detail-page__info-row">
+          <text class="clothing-detail-page__label">品类</text>
+          <text class="clothing-detail-page__value">{{clothing.category}}</text>
+        </view>
+
+        <view class="clothing-detail-page__info-row">
+          <text class="clothing-detail-page__label">使用频率</text>
+          <text class="clothing-detail-page__value">{{clothing.useCount}} 次</text>
+        </view>
+        
+        <view class="clothing-detail-page__info-row" wx:if="{{clothing.lastUsedAtDisplay}}">
+          <text class="clothing-detail-page__label">最后使用</text>
+          <text class="clothing-detail-page__value">{{clothing.lastUsedAtDisplay}}</text>
+        </view>
+      </view>
+
+      <!-- 3. 属性详情卡片 (补全丢失的所有属性) -->
+      <view class="clothing-detail-page__card">
+        <!-- 颜色 -->
+        <view class="clothing-detail-page__tag-section" wx:if="{{clothing.color.length}}">
+          <text class="clothing-detail-page__tag-title">颜色</text>
+          <view class="clothing-detail-page__tags">
+            <text class="clothing-detail-page__tag" wx:for="{{clothing.color}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+        
+        <!-- 季节 -->
+        <view class="clothing-detail-page__tag-section" wx:if="{{clothing.season.length}}">
+          <text class="clothing-detail-page__tag-title">适合季节</text>
+          <view class="clothing-detail-page__tags">
+            <text class="clothing-detail-page__tag" wx:for="{{clothing.season}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+
+        <!-- 场合 -->
+        <view class="clothing-detail-page__tag-section" wx:if="{{clothing.occasion.length}}">
+          <text class="clothing-detail-page__tag-title">适用场合</text>
+          <view class="clothing-detail-page__tags">
+            <text class="clothing-detail-page__tag" wx:for="{{clothing.occasion}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+
+        <!-- 单品款式 -->
+        <view class="clothing-detail-page__tag-section" wx:if="{{clothing.style.length}}">
+          <text class="clothing-detail-page__tag-title">单品款式</text>
+          <view class="clothing-detail-page__tags">
+            <text class="clothing-detail-page__tag" wx:for="{{clothing.style}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+
+        <!-- 材质 -->
+        <view class="clothing-detail-page__tag-section" wx:if="{{clothing.material.length}}">
+          <text class="clothing-detail-page__tag-title">材质构成</text>
+          <view class="clothing-detail-page__tags">
+            <text class="clothing-detail-page__tag" wx:for="{{clothing.material}}" wx:key="*this">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 4. 底部操作栏 -->
+  <view class="clothing-detail-page__footer">
+    <view class="clothing-detail-page__btns" wx:if="{{editing}}">
+      <button class="btn btn--secondary" bindtap="handleCancelEdit">取消</button>
+      <button class="btn btn--primary" bindtap="handleSaveEdit">保存</button>
+    </view>
+    <view class="clothing-btns">
+      <button class="btn btn--secondary" bindtap="handleRename">重命名</button>
+      <button class="btn btn--danger" bindtap="handleDelete">删除单品</button>
+    </view>
+  </view>
+</view>

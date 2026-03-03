@@ -1,0 +1,70 @@
+<!-- Filter Bar 组件 - 极简常驻版 -->
+<view class="filter-bar">
+  <view class="filter-bar__container">
+    
+    <!-- 品类筛选行 -->
+    <view class="filter-bar__row">
+      <view class="filter-bar__label">品类</view>
+      <scroll-view class="filter-bar__scroll" scroll-x enable-flex show-scrollbar="{{false}}">
+        <view class="filter-bar__scroll-content">
+          <view
+            class="filter-bar__tag {{selectedCategory === '' ? 'filter-bar__tag--active' : ''}}"
+            bindtap="handleCategoryTap"
+            data-value=""
+          >全部</view>
+          <view
+            class="filter-bar__tag {{selectedCategory === item.value ? 'filter-bar__tag--active' : ''}}"
+            wx:for="{{categories}}"
+            wx:key="value"
+            data-value="{{item.value}}"
+            bindtap="handleCategoryTap"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 季节筛选行 -->
+    <view class="filter-bar__row">
+      <view class="filter-bar__label">季节</view>
+      <scroll-view class="filter-bar__scroll" scroll-x enable-flex show-scrollbar="{{false}}">
+        <view class="filter-bar__scroll-content">
+          <view
+            class="filter-bar__tag {{selectedSeason === '' ? 'filter-bar__tag--active' : ''}}"
+            bindtap="handleSeasonTap"
+            data-value=""
+          >全部</view>
+          <view
+            class="filter-bar__tag {{selectedSeason === item.value ? 'filter-bar__tag--active' : ''}}"
+            wx:for="{{seasons}}"
+            wx:key="value"
+            data-value="{{item.value}}"
+            bindtap="handleSeasonTap"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 排序筛选行 -->
+    <view class="filter-bar__row">
+      <view class="filter-bar__label">排序</view>
+      <scroll-view class="filter-bar__scroll" scroll-x enable-flex show-scrollbar="{{false}}">
+        <view class="filter-bar__scroll-content">
+          <view
+            class="filter-bar__tag {{selectedSort === item.value ? 'filter-bar__tag--active' : ''}}"
+            wx:for="{{sortOptions}}"
+            wx:key="value"
+            data-value="{{item.value}}"
+            bindtap="handleSortTap"
+          >
+            {{item.label}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+  </view>
+</view>

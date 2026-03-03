@@ -1,0 +1,38 @@
+<!-- 历史对话页面 -->
+<view class="chat-history-page">
+  <navigation-bar title="历史对话" />
+
+  <scroll-view class="chat-history-page__scroll" scroll-y>
+    <view class="chat-history-page__list" wx:if="{{!loading && historyList.length > 0}}">
+      <view
+        class="chat-history-page__group"
+        wx:for="{{historyList}}"
+        wx:key="date"
+      >
+        <view class="chat-history-page__date-header">
+          <text>{{item.date}}</text>
+          <text class="chat-history-page__count">{{item.messages.length}} 条消息</text>
+        </view>
+
+        <view class="chat-history-page__messages">
+          <view
+            class="chat-history-page__msg chat-history-page__msg--{{msg.type}}"
+            wx:for="{{item.messages}}"
+            wx:for-item="msg"
+            wx:key="id"
+          >
+            <text class="chat-history-page__msg-content">{{msg.content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="chat-history-page__empty" wx:if="{{!loading && historyList.length === 0}}">
+      <text>暂无历史对话</text>
+    </view>
+
+    <view class="chat-history-page__loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "clothing-card": "../clothing-card/clothing-card"
+  }
+}

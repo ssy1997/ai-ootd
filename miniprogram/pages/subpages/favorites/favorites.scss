@@ -1,0 +1,59 @@
+@import '../../../styles/variables.scss';
+
+.favorites-page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(100rpx + 20rpx + env(safe-area-inset-bottom)); // 底部tab栏高度 + 安全区域
+}
+
+.favorites-page__scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.favorites-page__list {
+  padding: var(--spacing-base);
+}
+
+.favorites-page__item {
+  margin-bottom: var(--spacing-base);
+}
+
+.favorites-page__date {
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.favorites-page__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  gap: var(--spacing-base);
+}
+
+.favorites-page__empty text:first-child {
+  font-size: 96rpx;
+}
+
+.favorites-page__empty text:nth-child(2) {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-primary);
+}
+
+.favorites-page__empty text:nth-child(3) {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.favorites-page__loading {
+  text-align: center;
+  padding: var(--spacing-xxl);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}

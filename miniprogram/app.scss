@@ -1,0 +1,28 @@
+@import './styles/variables.scss';
+
+page {
+  background-color: $color-bg-base;
+  color: $color-text-main;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+view, scroll-view, text {
+  box-sizing: border-box;
+}
+
+// 通用点击效果
+.tap-active {
+  opacity: 0.7;
+  transition: opacity $duration-fast;
+}
+
+// 隐藏滚动条但保留功能
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}

@@ -1,0 +1,40 @@
+/* ========================================
+   全局样式变量 - Frosted Chic Theme
+   ======================================== */
+
+// 1. 核心配色 (Core Colors)
+$color-bg-base: #F2F2F7;          // 系统底色 (Cool Gray)
+$color-glass-base: rgba(255, 255, 255, 0.7); // 毛玻璃基础色
+$color-primary: #000000;           // 主色
+$color-accent: #7873f5;            // 高亮色 (来源于 TabBar 激活态)
+$color-text-main: #1C1C1E;         // 标题黑
+$color-text-sub: #636366;          // 正文灰
+$color-text-muted: #8E8E93;        // 提示灰
+$color-divider: rgba(0, 0, 0, 0.05); // 极淡分割线
+
+// 2. 交互状态
+$color-active-bg: rgba(0, 0, 0, 0.03);
+$color-error: #FF3B30;
+
+// 3. 几何规范 (Geometry)
+$radius-large: 32rpx;   // 核心容器圆角
+$radius-medium: 24rpx;  // 卡片/输入框圆角
+$radius-small: 12rpx;   // 标签/按钮圆角
+
+// 4. 阴影美学 (Shadows)
+// 采用超大扩散、极低透明度的阴影，模拟环境光
+$shadow-glass: 0 16rpx 40rpx rgba(0, 0, 0, 0.04);
+$shadow-floating: 0 20rpx 60rpx rgba(0, 0, 0, 0.06);
+
+// 5. 动效 (Transitions)
+$ease-ios: cubic-bezier(0.25, 0.1, 0.25, 1);
+$duration-base: 0.3s;
+$duration-fast: 0.2s;
+
+// 6. 毛玻璃混入 (Glassmorphism Mixin)
+@mixin glass-effect {
+  background: $color-glass-base;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navigation-bar": "../../../components/navigation-bar/navigation-bar",
+    "outfit-display": "../../../components/outfit-display/outfit-display"
+  },
+  "navigationStyle": "custom"
+}

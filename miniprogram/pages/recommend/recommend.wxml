@@ -1,0 +1,58 @@
+<!-- 推荐页面 -->
+<view class="recommend-page">
+  <navigation-bar title="AI 推荐" back="{{false}}" />
+
+  <!-- 天气信息栏 -->
+  <view class="recommend-page__weather-bar">
+    <weather-widget
+      weather="{{weather}}"
+      cityName="{{cityName}}"
+      showCity="{{true}}"
+      compact="{{true}}"
+      bindrefresh="fetchWeather"
+    />
+  </view>
+
+  <view class="recommend-page__body">
+    <!-- 对话消息区域 -->
+    <scroll-view
+      class="recommend-page__messages"
+      scroll-y
+      enable-flex
+      scroll-into-view="{{scrollIntoView}}"
+      scroll-with-animation
+    >
+      <view class="recommend-page__message-list">
+        <chat-bubble
+          wx:for="{{messages}}"
+          wx:key="id"
+          message="{{item}}"
+          bindquickReply="handleQuickReply"
+          bindfavorite="handleFeedback"
+          bindfeedback="handleFeedback"
+          bindwear="handleWear"
+        />
+      </view>
+
+      <view class="recommend-page__loading" wx:if="{{loading}}">
+        <text>AI 思考中...</text>
+      </view>
+
+      <view id="scroll-bottom" style="height: 20rpx;"></view>
+    </scroll-view>
+
+    <!-- 输入区域：绑定稳定性修复后的 currentQuickReplies -->
+    <view class="recommend-page__input-wrapper">
+      <chat-input
+        disabled="{{loading}}"
+        placeholder="问问AI 穿搭师..."
+        quickReplies="{{currentQuickReplies}}"
+        bindsend="handleSend"
+        bindquickReply="handleQuickReply"
+        bindimageSelect="handleImageSelect"
+      />
+    </view>
+  </view>
+
+  <tab-bar activeTab="recommend" bindchange="handleTabChange" />
+</view>

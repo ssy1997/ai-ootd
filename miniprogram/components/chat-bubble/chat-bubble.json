@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "outfit-display": "../outfit-display/outfit-display"
+  }
+}

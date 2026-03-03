@@ -1,0 +1,48 @@
+<!-- Outfit Display 组件 - 极简展示版 -->
+<view
+  class="outfit-display {{compact ? 'outfit-display--compact' : ''}}"
+  wx:if="{{outfit}}"
+  bindtap="handleTap"
+>
+  <!-- 顶部信息 (仅完整模式) -->
+  <view class="outfit-display__header" wx:if="{{!compact}}">
+    <view class="outfit-display__title">今日推荐搭配</view>
+    <view
+      class="outfit-display__favorite {{innerFav ? 'outfit-display__favorite--active' : ''}}"
+      wx:if="{{showFavorite}}"
+      catchtap="handleFavoriteTap"
+    >
+      <text>{{innerFav ? '★' : '☆'}}</text>
+    </view>
+  </view>
+
+  <!-- 搭配图片网格 -->
+  <view class="outfit-display__grid">
+    <view
+      class="outfit-display__item"
+      wx:for="{{outfit.items}}"
+      wx:key="_id"
+      data-index="{{index}}"
+      catchtap="handleClothingTap"
+    >
+      <image class="outfit-display__image" src="{{item.imageUrl}}" mode="aspectFill" lazy-load />
+    </view>
+  </view>
+
+  <!-- 标签 (仅完整模式) -->
+  <view class="outfit-display__tags" wx:if="{{!compact && displayTags && displayTags.length > 0}}">
+    <text class="outfit-display__tag" wx:for="{{displayTags}}" wx:for-item="tag" wx:key="*this">#{{tag}}</text>
+  </view>
+
+  <!-- 已删除: 内部的 wear-action 按钮，交由外层胶囊控制 -->
+  
+  <!-- 已显示: 已穿状态提示 (可选保留，增加视觉确认) -->
+  <view class="outfit-display__worn-status" wx:if="{{outfit.hasWorn || outfit.lastWornDate}}">
+    <text>✅ 今日已穿搭</text>
+  </view>
+</view>
+
+<view class="outfit-display outfit-display--empty" wx:else>
+  <view class="outfit-display__empty-icon">👗</view>
+  <view class="outfit-display__empty-text">暂无搭配</view>
+</view>

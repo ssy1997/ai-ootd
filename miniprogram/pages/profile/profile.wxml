@@ -1,0 +1,39 @@
+<!-- 个人中心 - 极简服饰看板 -->
+<view class="profile-page">
+  <!-- 自定义导航栏 -->
+  <navigation-bar title="我的" back="{{false}}" />
+
+  <!-- 数据仪表盘 (双核版) -->
+  <view class="profile-page__dashboard">
+    <view class="profile-page__stat-item">
+      <text class="profile-page__stat-value">{{stats.total}}</text>
+      <text class="profile-page__stat-label">服饰总数</text>
+    </view>
+    <view class="profile-page__stat-divider"></view>
+    <view class="profile-page__stat-item">
+      <text class="profile-page__stat-value">{{stats.utilization}}%</text>
+      <text class="profile-page__stat-label">穿搭率</text>
+    </view>
+  </view>
+
+  <!-- 核心功能菜单 -->
+  <view class="profile-page__menu">
+    <view class="profile-page__menu-item" bindtap="handleStylePreference">
+      <text class="profile-page__menu-text">风格偏好</text>
+      <view class="profile-page__menu-arrow"></view>
+    </view>
+    
+    <view class="profile-page__menu-item" bindtap="handleFavorites">
+      <text class="profile-page__menu-text">收藏搭配</text>
+      <view class="profile-page__menu-arrow"></view>
+    </view>
+
+    <view class="profile-page__menu-item" bindtap="handleIdleClothing">
+      <text class="profile-page__menu-text">闲置服饰</text>
+      <view class="profile-page__menu-arrow"></view>
+    </view>
+  </view>
+
+  <!-- 底部 Tab Bar -->
+  <tab-bar activeTab="profile" bindchange="handleTabChange" />
+</view>

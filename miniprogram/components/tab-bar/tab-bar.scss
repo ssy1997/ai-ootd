@@ -1,0 +1,60 @@
+@import '../../styles/variables.scss';
+
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(110rpx + env(safe-area-inset-bottom));
+  background-color: #FFFFFF; // 核心修复：设置不透明背景
+  display: flex;
+  align-items: flex-start;
+  padding-top: 10rpx;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+}
+
+.tab-bar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 0;
+  transition: all 0.2s;
+
+  &--active {
+    .tab-bar__icon {
+      color: $color-accent; // 使用全局高亮色
+    }
+    .tab-bar__label {
+      color: $color-accent;
+      font-weight: 600;
+    }
+  }
+}
+
+.tab-bar__icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-bottom: 6rpx;
+  color: #999; // 默认颜色
+}
+
+.tab-bar__icon-wrapper {
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-bar__icon--large {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.tab-bar__label {
+  font-size: 20rpx;
+  color: #999;
+}

@@ -1,0 +1,56 @@
+<!-- Clothing Card 组件 -->
+<view
+  class="clothing-card {{selected ? 'clothing-card--selected' : ''}}"
+  wx:if="{{clothing && clothing._id}}"
+  bindtap="handleTap"
+  bindlongpress="handleLongPress"
+>
+  <!-- 图片容器 -->
+  <view class="clothing-card__image-wrapper">
+    <image
+      class="clothing-card__image"
+      src="{{clothing.imageUrl}}"
+      mode="aspectFill"
+      lazy-load
+      bindload="handleImageLoad"
+      binderror="handleImageError"
+    />
+
+    <!-- 闲置标记 -->
+    <view
+      class="clothing-card__tag clothing-card__tag--idle"
+      wx:if="{{showIdleTag && isIdle()}}"
+    >
+    </view>
+
+    <!-- 选中标记 -->
+    <view class="clothing-card__check" wx:if="{{selected}}">
+      <text class="clothing-card__check-icon">✓</text>
+    </view>
+  </view>
+
+  <!-- 信息区域 -->
+  <view class="clothing-card__info">
+    <!-- 品类标签 -->
+    <view class="clothing-card__category">
+      {{displayCategory}}
+    </view>
+
+    <!-- 名称 -->
+    <view class="clothing-card__name">{{clothing.name}}</view>
+
+    <!-- 状态反馈 (次数 + 时间) -->
+    <view class="clothing-card__footer">
+      <text class="clothing-card__use-count" wx:if="{{showUseCount}}">{{clothing.useCount}} 次</text>
+      <text class="clothing-card__last-worn" wx:if="{{showLastWorn && clothing.lastWornDate}}">{{clothing.lastWornDate}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 空态 -->
+<view class="clothing-card clothing-card--empty" wx:else>
+  <view class="clothing-card__empty-icon">
+    <text>📷</text>
+  </view>
+  <view class="clothing-card__empty-text">暂无图片</view>
+</view>

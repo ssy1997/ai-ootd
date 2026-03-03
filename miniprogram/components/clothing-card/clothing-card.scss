@@ -1,0 +1,88 @@
+@import '../../styles/variables.scss';
+
+.clothing-card {
+  background-color: #FFFFFF;
+  border-radius: $radius-medium;
+  overflow: hidden;
+  box-shadow: $shadow-glass;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform $duration-fast $ease-ios, box-shadow $duration-fast $ease-ios;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: none;
+  }
+}
+
+.clothing-card--selected {
+  border: 4rpx solid $color-primary;
+}
+
+.clothing-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 125%; // 4:5 黄金穿搭比例
+  background-color: #F8F8F8;
+}
+
+.clothing-card__image {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.clothing-card__info {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.clothing-card__category {
+  font-size: 20rpx;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 1rpx;
+}
+
+.clothing-card__name {
+  font-size: 26rpx;
+  color: $color-text-main;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clothing-card__footer {
+  margin-top: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clothing-card__use-count, 
+.clothing-card__last-worn {
+  font-size: 20rpx;
+  color: $color-text-muted;
+}
+
+.clothing-card__check {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 44rpx;
+  height: 44rpx;
+  background-color: $color-primary;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 10rpx rgba(0,0,0,0.2);
+}
+
+.clothing-card__check-icon {
+  color: #FFFFFF;
+  font-size: 24rpx;
+}

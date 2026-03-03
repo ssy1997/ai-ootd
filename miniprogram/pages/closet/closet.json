@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navigation-bar": "../../components/navigation-bar/navigation-bar",
+    "filter-bar": "../../components/filter-bar/filter-bar",
+    "clothing-card": "../../components/clothing-card/clothing-card",
+    "tab-bar": "../../components/tab-bar/tab-bar"
+  },
+  "navigationStyle": "custom"
+}

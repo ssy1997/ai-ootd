@@ -1,0 +1,156 @@
+<!-- 添加服饰页面 (一图多单品优化版) -->
+<wxs module="utils">
+module.exports.includes = function(arr, val) {
+  if (!arr || !arr.length) return false;
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === val) return true;
+  }
+  return false;
+}
+</wxs>
+
+<view class="add-clothing-page">
+  <navigation-bar title="添加服饰" />
+
+  <scroll-view class="add-clothing-page__scroll" scroll-y enable-passive>
+    <!-- 1. 图片预览区 (仅在未识别或识别前显示) -->
+    <view class="add-clothing-page__image-section" wx:if="{{pendingList.length <= 1}}">
+      <view class="add-clothing-page__image-wrapper" bindtap="handleChooseImage">
+        <image class="add-clothing-page__image" src="{{imageUrl}}" mode="aspectFill" wx:if="{{imageUrl}}" />
+        <view class="add-clothing-page__image-placeholder" wx:else>
+          <text class="add-clothing-page__image-icon">📷</text>
+          <text class="add-clothing-page__image-text">点击拍摄或上传图片</text>
+        </view>
+        <view class="add-clothing-page__recognizing" wx:if="{{recognizing}}">
+          <view class="add-clothing-page__spinner"></view>
+          <text>AI 正在智能分拣...</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 2. 多单品分拣清单 (仅在识别出多件时显示，参考服饰页面卡片风格) -->
+    <view class="add-clothing-page__multi-header" wx:if="{{pendingList.length > 1}}">
+      <view class="add-clothing-page__section-title">AI 已自动分拣出 {{pendingList.length}} 件单品</view>
+      <scroll-view class="add-clothing-page__horizontal-list" scroll-x enable-flex>
+        <view 
+          wx:for="{{pendingList}}" 
+          wx:key="index"
+          class="add-clothing-page__mini-card {{activeIndex === index ? 'add-clothing-page__mini-card--active' : ''}}"
+          bindtap="handleSwitchActive"
+          data-index="{{index}}"
+        >
+          <image class="add-clothing-page__mini-img" src="{{imageUrl}}" mode="aspectFill" />
+          <view class="add-clothing-page__mini-info">
+            <text class="add-clothing-page__mini-name">{{item.name}}</text>
+            <text class="add-clothing-page__mini-pos">{{item.positionHint || '单品'}}</text>
+          </view>
+          <view class="add-clothing-page__mini-badge" wx:if="{{activeIndex === index}}">选中</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 3. 详情编辑区 -->
+    <block wx:if="{{pendingList.length > 0}}">
+      <!-- 实时更名卡片 -->
+      <view class="add-clothing-page__card add-clothing-page__name-card">
+        <view class="add-clothing-page__input-group">
+          <text class="add-clothing-page__label">单品名称</text>
+          <input 
+            class="add-clothing-page__name-input"
+            value="{{pendingList[activeIndex].name}}"
+            placeholder="为单品起个名字"
+            bindinput="handleNameInput"
+          />
+        </view>
+      </view>
+
+      <view class="add-clothing-page__card">
+        <!-- 品类 -->
+        <view class="add-clothing-page__section">
+          <view class="add-clothing-page__section-header">
+            <text class="add-clothing-page__section-title">所属品类</text>
+          </view>
+          <view class="add-clothing-page__tags">
+            <view 
+              class="add-clothing-page__tag {{pendingList[activeIndex].category === item.value ? 'add-clothing-page__tag--active' : ''}}" 
+              wx:for="{{options.categories}}" 
+              wx:key="value" 
+              data-value="{{item.value}}" 
+              bindtap="handleCategoryChange"
+            >{{item.label}}</view>
+            <view class="add-clothing-page__tag add-clothing-page__tag--custom" bindtap="handleAddCustomTag" data-type="categories">+</view>
+          </view>
+        </view>
+
+        <!-- 单品款式 -->
+        <view class="add-clothing-page__section">
+          <view class="add-clothing-page__section-header">
+            <text class="add-clothing-page__section-title">单品款式</text>
+            <text class="add-clothing-page__sub-title">可多选</text>
+          </view>
+          <view class="add-clothing-page__tags">
+            <view 
+              class="add-clothing-page__tag {{utils.includes(pendingList[activeIndex].style, item.value) ? 'add-clothing-page__tag--active' : ''}}" 
+              wx:for="{{options.styles}}" 
+              wx:key="value" 
+              data-value="{{item.value}}" 
+              bindtap="handleStyleChange"
+            >{{item.label}}</view>
+            <view class="add-clothing-page__tag add-clothing-page__tag--custom" bindtap="handleAddCustomTag" data-type="styles">+</view>
+          </view>
+        </view>
+
+        <!-- 适用季节 -->
+        <view class="add-clothing-page__section">
+          <view class="add-clothing-page__section-header">
+            <text class="add-clothing-page__section-title">适合季节</text>
+          </view>
+          <view class="add-clothing-page__tags">
+            <view 
+              class="add-clothing-page__tag {{utils.includes(pendingList[activeIndex].season, item.value) ? 'add-clothing-page__tag--active' : ''}}" 
+              wx:for="{{options.seasons}}" 
+              wx:key="value" 
+              data-value="{{item.value}}" 
+              bindtap="handleSeasonChange"
+            >{{item.label}}</view>
+          </view>
+        </view>
+
+        <!-- 适用场合 -->
+        <view class="add-clothing-page__section">
+          <view class="add-clothing-page__section-header">
+            <text class="add-clothing-page__section-title">适用场合</text>
+          </view>
+          <view class="add-clothing-page__tags">
+            <view 
+              class="add-clothing-page__tag {{utils.includes(pendingList[activeIndex].occasion, item.value) ? 'add-clothing-page__tag--active' : ''}}" 
+              wx:for="{{options.occasions}}" 
+              wx:key="value" 
+              data-value="{{item.value}}" 
+              bindtap="handleOccasionChange"
+            >{{item.label}}</view>
+            <view class="add-clothing-page__tag add-clothing-page__tag--custom" bindtap="handleAddCustomTag" data-type="occasions">+</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作区 -->
+      <view class="add-clothing-page__danger-zone" wx:if="{{pendingList.length > 1}}">
+        <button class="add-clothing-page__remove-btn" bindtap="handleRemoveItem" data-index="{{activeIndex}}">移除当前识别项</button>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- 底部固定栏 -->
+  <view class="add-clothing-page__footer" wx:if="{{pendingList.length > 0}}">
+    <view class="add-clothing-page__outfit-toggle" bindtap="handleToggleCreateOutfit" wx:if="{{pendingList.length > 1}}">
+      <view class="add-clothing-page__checkbox {{createOutfit ? 'add-clothing-page__checkbox--active' : ''}}">
+        <text wx:if="{{createOutfit}}">✓</text>
+      </view>
+      <text class="add-clothing-page__toggle-label">同步存为今日穿搭收藏</text>
+    </view>
+    <button class="add-clothing-page__save-btn" disabled="{{loading}}" bindtap="handleSave">
+      {{loading ? '入库中...' : '确认入库 (' + pendingList.length + ')'}}
+    </button>
+  </view>
+</view>

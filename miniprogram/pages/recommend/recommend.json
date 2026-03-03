@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "navigation-bar": "../../components/navigation-bar/navigation-bar",
+    "chat-bubble": "../../components/chat-bubble/chat-bubble",
+    "chat-input": "../../components/chat-input/chat-input",
+    "weather-widget": "../../components/weather-widget/weather-widget",
+    "tab-bar": "../../components/tab-bar/tab-bar"
+  },
+  "navigationStyle": "custom"
+}

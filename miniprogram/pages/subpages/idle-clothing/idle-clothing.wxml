@@ -1,0 +1,32 @@
+<!-- 闲置服饰页面 -->
+<view class="idle-clothing-page">
+  <navigation-bar title="断舍离" />
+
+  <scroll-view class="idle-clothing-page__scroll" scroll-y>
+    <view class="idle-clothing-page__list">
+      <view class="idle-clothing-page__item" wx:for="{{idleList}}" wx:key="_id">
+        <clothing-card
+          clothing="{{item}}"
+          bindtap="handleClothingTap"
+          bindlongpress="handleClothingLongPress"
+        />
+      </view>
+    </view>
+
+    <view class="idle-clothing-page__empty" wx:if="{{!loading && idleList.length === 0}}">
+      <text>🎉</text>
+      <text>暂无闲置服饰</text>
+      <text>超过90天未使用的服饰会显示在这里</text>
+      <button class="idle-clothing-page__button" bindtap="handleAddClothing">添加服饰</button>
+    </view>
+
+    <view class="idle-clothing-page__loading" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+  </scroll-view>
+
+  <view class="idle-clothing-page__footer" wx:if="{{selectedIds.length > 0}}">
+    <text>已选择 {{selectedIds.length}} 件</text>
+    <button class="idle-clothing-page__delete-btn" bindtap="handleBatchDelete">删除</button>
+  </view>
+</view>

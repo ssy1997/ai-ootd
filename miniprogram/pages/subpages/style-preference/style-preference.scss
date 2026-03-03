@@ -1,0 +1,150 @@
+/* ========================================
+   风格偏好页面样式 - Frosted Chic 版 (对齐全站)
+   ======================================== */
+
+@import '../../../styles/variables.scss';
+
+.style-preference-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $color-bg-base; // 系统底色
+}
+
+.style-preference-page__scroll {
+  flex: 1;
+}
+
+// 头部：AI 看板区域 (卡片化设计)
+.style-preference-page__auto-section {
+  margin: 30rpx;
+  padding: 40rpx 30rpx;
+  background-color: #FFFFFF;
+  border-radius: $radius-large; 
+  box-shadow: $shadow-glass;
+}
+
+.style-preference-page__auto-title {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: $color-text-main;
+  margin-bottom: 40rpx;
+}
+
+.style-preference-page__auto-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+.style-preference-page__auto-label {
+  width: 140rpx;
+  font-size: 26rpx;
+  color: $color-text-muted;
+}
+
+.style-preference-page__auto-capsules {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+// AI 分析胶囊：使用项目高亮色 (来源于 TabBar)
+.style-preference-page__capsule {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 28rpx;
+  border-radius: 100rpx;
+  font-size: 24rpx;
+  background-color: rgba(120, 115, 245, 0.08); // 极淡的高亮背景
+  color: $color-accent; // 使用 TabBar 激活色
+  border: 1rpx solid rgba(120, 115, 245, 0.15);
+  font-weight: 500;
+}
+
+// 分割线
+.style-preference-page__divider {
+  text-align: center;
+  font-size: 24rpx;
+  color: $color-text-muted;
+  margin: 60rpx 0 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &::before, &::after {
+    content: '';
+    width: 60rpx;
+    height: 1rpx;
+    background: $color-divider;
+    margin: 0 20rpx;
+  }
+}
+
+// 手动设置区
+.style-preference-page__section {
+  margin: 0 30rpx 30rpx;
+  padding: 30rpx;
+  background-color: #FFFFFF;
+  border-radius: $radius-medium;
+}
+
+.style-preference-page__title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 24rpx;
+  color: $color-text-main;
+}
+
+.style-preference-page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+// 选项标签：极简灰色底
+.style-preference-page__tag {
+  padding: 12rpx 32rpx;
+  background-color: #F5F5F7;
+  border-radius: 100rpx;
+  font-size: 24rpx;
+  color: $color-text-sub;
+  transition: all 0.2s ease;
+
+  // 激活态：使用项目高亮色
+  &--active {
+    background-color: $color-accent;
+    color: #FFFFFF;
+    box-shadow: 0 4rpx 12rpx rgba(120, 115, 245, 0.2);
+  }
+}
+
+// 底部操作区
+.style-preference-page__footer {
+  padding: 30rpx 40rpx calc(30rpx + env(safe-area-inset-bottom));
+  background-color: #FFF;
+  border-top: 1rpx solid $color-divider;
+}
+
+.style-preference-page__save-btn {
+  background: $color-accent; // 改为高亮色
+  color: #FFF;
+  border-radius: 100rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}

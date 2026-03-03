@@ -1,0 +1,37 @@
+@import '../../../styles/variables.scss';
+
+.outfit-history-page {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(100rpx + 20rpx + env(safe-area-inset-bottom)); // 底部tab栏高度 + 安全区域
+}
+
+.outfit-history-page__scroll {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.outfit-history-page__list {
+  padding: var(--spacing-base);
+}
+
+.outfit-history-page__item {
+  margin-bottom: var(--spacing-base);
+}
+
+.outfit-history-page__date {
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.outfit-history-page__empty,
+.outfit-history-page__loading {
+  text-align: center;
+  padding: var(--spacing-xxl);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}

@@ -1,0 +1,10 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "天气服务云函数",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest",
+    "axios": "latest"
+  }
+}

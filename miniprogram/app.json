@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/closet/closet",
+    "pages/recommend/recommend",
+    "pages/profile/profile"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/subpages",
+      "pages": [
+        "add-clothing/add-clothing",
+        "clothing-detail/clothing-detail",
+        "style-preference/style-preference",
+        "outfit-detail/outfit-detail",
+        "outfit-history/outfit-history",
+        "idle-clothing/idle-clothing",
+        "favorites/favorites",
+        "chat-history/chat-history"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "cloudfunctionRoot": "cloudfunctions/",
+  "cloud": true,
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于获取当地天气信息及位置服务"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"]
+}

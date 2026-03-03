@@ -1,0 +1,113 @@
+<!-- 风格偏好页面 -->
+<view class="style-preference-page">
+  <navigation-bar title="风格偏好" />
+
+  <scroll-view class="style-preference-page__scroll" scroll-y>
+    
+    <!-- AI 自动学习看板 (极简版) -->
+    <view class="style-preference-page__auto-section">
+      <view class="style-preference-page__auto-header">
+        <view class="style-preference-page__auto-title">
+          <text class="style-preference-page__dna-icon">✨</text>
+          <text>AI 偏好分析 (Top 3)</text>
+        </view>
+      </view>
+
+      <view class="style-preference-page__auto-content" wx:if="{{autoAI.colors.length > 0 || autoAI.styles.length > 0 || autoAI.occasions.length > 0}}">
+        
+        <!-- 款式偏向胶囊 -->
+        <view class="style-preference-page__auto-row" wx:if="{{autoAI.styles.length > 0}}">
+          <text class="style-preference-page__auto-label">款式偏向</text>
+          <view class="style-preference-page__auto-capsules">
+            <view class="style-preference-page__capsule style-preference-page__capsule--style" wx:for="{{autoAI.styles}}" wx:key="name">
+              <text class="style-preference-page__capsule-name">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 常用色系胶囊 -->
+        <view class="style-preference-page__auto-row" wx:if="{{autoAI.colors.length > 0}}">
+          <text class="style-preference-page__auto-label">常用色系</text>
+          <view class="style-preference-page__auto-capsules">
+            <view class="style-preference-page__capsule style-preference-page__capsule--color" wx:for="{{autoAI.colors}}" wx:key="name">
+              <text class="style-preference-page__capsule-name">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 核心场合胶囊 -->
+        <view class="style-preference-page__auto-row" wx:if="{{autoAI.occasions.length > 0}}">
+          <text class="style-preference-page__auto-label">核心场合</text>
+          <view class="style-preference-page__auto-capsules">
+            <view class="style-preference-page__capsule style-preference-page__capsule--occasion" wx:for="{{autoAI.occasions}}" wx:key="name">
+              <text class="style-preference-page__capsule-name">{{item.name}}</text>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+      <view class="style-preference-page__empty-box" wx:else>
+        <text>多交互几次，AI 就能发现您的规律了</text>
+      </view>
+    </view>
+
+    <!-- 手动设置区 -->
+    <view class="style-preference-page__divider">手动设置偏好</view>
+
+    <view class="style-preference-page__section">
+      <view class="style-preference-page__title">偏爱颜色</view>
+      <view class="style-preference-page__tags">
+        <view
+          class="style-preference-page__tag {{preference.preferredColors.includes(item.value) ? 'style-preference-page__tag--active' : ''}}"
+          wx:for="{{options.colors}}"
+          wx:key="value"
+          data-value="{{item.value}}"
+          data-selected="{{preference.preferredColors.includes(item.value)}}"
+          bindtap="handleColorChange"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <view class="style-preference-page__section">
+      <view class="style-preference-page__title">偏爱款式</view>
+      <view class="style-preference-page__tags">
+        <view
+          class="style-preference-page__tag {{preference.preferredStyles.includes(item.value) ? 'style-preference-page__tag--active' : ''}}"
+          wx:for="{{options.styles}}"
+          wx:key="value"
+          data-value="{{item.value}}"
+          data-selected="{{preference.preferredStyles.includes(item.value)}}"
+          bindtap="handleStyleChange"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <view class="style-preference-page__section">
+      <view class="style-preference-page__title">偏爱场合</view>
+      <view class="style-preference-page__tags">
+        <view
+          class="style-preference-page__tag {{preference.preferredOccasions.includes(item.value) ? 'style-preference-page__tag--active' : ''}}"
+          wx:for="{{options.occasions}}"
+          wx:key="value"
+          data-value="{{item.value}}"
+          data-selected="{{preference.preferredOccasions.includes(item.value)}}"
+          bindtap="handleOccasionChange"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+
+  <view class="style-preference-page__footer">
+    <button class="style-preference-page__save-btn" bindtap="handleSave" disabled="{{loading}}">
+      保存并同步
+    </button>
+  </view>
+</view>

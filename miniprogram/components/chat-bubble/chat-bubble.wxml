@@ -1,0 +1,55 @@
+<!-- Chat Bubble 组件 - 稳定文案版 -->
+
+<!-- AI 消息 -->
+<view class="chat-bubble chat-bubble--ai" wx:if="{{isAI}}">
+  <view class="chat-bubble__main">
+    <view class="chat-bubble__bubble">
+      <text class="chat-bubble__text">{{message.content}}</text>
+
+      <!-- 推荐内容 -->
+      <block wx:if="{{message.outfit}}">
+        <outfit-display
+          outfit="{{message.outfit}}"
+          isFavorited="{{isFav}}"
+          hasLiked="{{isLik}}"
+          compact="{{true}}"
+          class="chat-bubble__outfit"
+        />
+        
+        <!-- 胶囊按钮组 -->
+        <view class="chat-bubble__actions">
+          <!-- 穿这套：文案固定，状态可切换 -->
+          <view class="chat-bubble__action-btn {{isWor ? 'chat-bubble__action-btn--active' : ''}}" bindtap="onActionTap" data-type="wear">
+            <text class="chat-bubble__action-icon">{{isWor ? '✅' : '✨'}}</text>
+            <text>穿这套</text>
+          </view>
+          <view class="chat-bubble__action-btn" bindtap="onActionTap" data-type="skip">
+            <text class="chat-bubble__action-icon">🔄</text>
+            <text>换一套</text>
+          </view>
+          <view class="chat-bubble__action-btn {{isLik ? 'chat-bubble__action-btn--active' : ''}}" bindtap="onActionTap" data-type="like">
+            <text class="chat-bubble__action-icon">{{isLik ? '❤️' : '♡'}}</text>
+            <text>{{isLik ? '已喜欢' : '喜欢'}}</text>
+          </view>
+          <view class="chat-bubble__action-btn {{isFav ? 'chat-bubble__action-btn--active' : ''}}" bindtap="onActionTap" data-type="favorite">
+            <text class="chat-bubble__action-icon">{{isFav ? '⭐️' : '☆'}}</text>
+            <text>{{isFav ? '已收藏' : '收藏'}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<!-- 用户消息 & 系统消息 (保持现状) -->
+<view class="chat-bubble chat-bubble--user" wx:elif="{{isUser}}">
+  <view class="chat-bubble__main">
+    <view class="chat-bubble__bubble">
+      <text class="chat-bubble__text">{{message.content}}</text>
+    </view>
+  </view>
+</view>
+
+<view class="chat-bubble chat-bubble--system" wx:elif="{{isSystem}}">
+  <text class="chat-bubble__system-text">{{message.content}}</text>
+</view>

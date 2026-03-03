@@ -1,0 +1,62 @@
+/**index.scss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  width: 80%;
+}
+
+.userinfo-avatar {
+  overflow: hidden;
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.usermotto {
+  margin-top: 400rpx;
+}
+
+.avatar-wrapper {
+  padding: 0;
+  width: 112rpx !important;
+  border-radius: 16rpx;
+  margin-top: 80rpx;
+  margin-bottom: 80rpx;
+}
+
+.avatar {
+  display: block;
+  width: 112rpx;
+  height: 112rpx;
+}
+
+.nickname-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 32rpx;
+  box-sizing: border-box;
+  border-top: .5px solid rgba(0, 0, 0, 0.1);
+  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.nickname-label {
+  width: 210rpx;
+}
+
+.nickname-input {
+  flex: 1;
+}

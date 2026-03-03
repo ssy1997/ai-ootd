@@ -1,0 +1,430 @@
+/* ========================================
+   样式混入 - Mixins
+   ======================================== */
+
+/* -------------------
+   响应式断点 - Responsive
+   ------------------- */
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: var(--screen-xs)) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: var(--screen-sm)) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: var(--screen-md)) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: var(--screen-lg)) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: var(--screen-xl)) { @content; }
+  }
+}
+
+/* -------------------
+   Flexbox 布局 - Flexbox
+   ------------------- */
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@mixin flex-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -------------------
+   文本样式 - Typography
+   ------------------- */
+
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+  }
+}
+
+@mixin font-size($size, $weight: null, $line-height: null) {
+  font-size: $size;
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $line-height {
+    line-height: $line-height;
+  }
+}
+
+/* -------------------
+   按钮样式 - Button
+   ------------------- */
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out);
+  white-space: nowrap;
+  user-select: none;
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+
+  &:active {
+    background-color: var(--color-primary-dark);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: var(--color-bg-white);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+
+  &:active {
+    background-color: var(--color-primary-light);
+  }
+}
+
+@mixin button-ghost {
+  @include button-base;
+  background-color: transparent;
+  color: var(--color-primary);
+
+  &:active {
+    background-color: var(--color-primary-light);
+  }
+}
+
+/* -------------------
+   卡片样式 - Card
+   ------------------- */
+
+@mixin card-base {
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+@mixin card-hover {
+  transition: all var(--duration-base) var(--ease-out);
+
+  &:active {
+    box-shadow: var(--shadow-base);
+    transform: translateY(-2px);
+  }
+}
+
+/* -------------------
+   安全区域 - Safe Area
+   ------------------- */
+
+@mixin safe-area-top {
+  padding-top: var(--safe-area-top);
+  padding-top: var(--safe-area-top-env);
+}
+
+@mixin safe-area-bottom {
+  padding-bottom: var(--safe-area-bottom);
+  padding-bottom: var(--safe-area-bottom-env);
+}
+
+@mixin safe-area-both {
+  padding-top: var(--safe-area-top);
+  padding-top: var(--safe-area-top-env);
+  padding-bottom: var(--safe-area-bottom);
+  padding-bottom: var(--safe-area-bottom-env);
+}
+
+/* -------------------
+   动画 - Animation
+   ------------------- */
+
+@mixin fade-in($duration: var(--duration-base)) {
+  animation: fadeIn $duration var(--ease-out);
+}
+
+@mixin fade-out($duration: var(--duration-base)) {
+  animation: fadeOut $duration var(--ease-out);
+}
+
+@mixin slide-up($duration: var(--duration-slow)) {
+  animation: slideUp $duration var(--ease-out);
+}
+
+@mixin slide-down($duration: var(--duration-slow)) {
+  animation: slideDown $duration var(--ease-out);
+}
+
+@mixin scale-in($duration: var(--duration-base)) {
+  animation: scaleIn $duration var(--ease-bounce);
+}
+
+/* -------------------
+   滚动条 - Scrollbar
+   ------------------- */
+
+@mixin hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-divider);
+    border-radius: var(--radius-full);
+
+    &:hover {
+      background-color: var(--color-text-tertiary);
+    }
+  }
+}
+
+/* -------------------
+   清除浮动 - Clearfix
+   ------------------- */
+
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+/* -------------------
+   绝对定位居中 - Absolute Center
+   ------------------- */
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin absolute-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* -------------------
+   禁用用户选择 - User Select
+   ------------------- */
+
+@mixin no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* -------------------
+   硬件加速 - Hardware Acceleration
+   ------------------- */
+
+@mixin hardware-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* -------------------
+   骨架屏动画 - Skeleton Animation
+   ------------------- */
+
+@mixin skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-gray) 25%,
+    var(--color-bg-purple) 50%,
+    var(--color-bg-gray) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* -------------------
+   关键帧动画定义 - Keyframes
+   ------------------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}

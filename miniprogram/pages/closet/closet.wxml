@@ -1,0 +1,65 @@
+<!-- 衣橱页面 -->
+<view class="closet-page">
+  <!-- 自定义导航栏 -->
+  <navigation-bar title="我的衣橱" back="{{false}}" />
+
+  <!-- 筛选栏：绑定动态品类 -->
+  <view class="closet-page__header">
+    <filter-bar
+      categories="{{dynamicCategories}}"
+      bindfilterChange="handleFilterChange"
+    />
+  </view>
+
+  <!-- 服饰列表 -->
+  <scroll-view
+    class="closet-page__content"
+    scroll-y
+    enable-back-to-top
+    bindscrolltolower="onReachBottom"
+    refresher-enabled
+    refresher-triggered="{{loading}}"
+    bindrefresherrefresh="onPullDownRefresh"
+  >
+    <view class="closet-page__grid" wx:if="{{clothingList.length > 0}}">
+      <clothing-card
+        wx:for="{{clothingList}}"
+        wx:key="_id"
+        clothing="{{item}}"
+        selected="{{item.selected}}"
+        bindtap="handleClothingTap"
+        bindlongpress="handleClothingLongPress"
+        data-clothing="{{item}}"
+      />
+    </view>
+
+    <!-- 空状态 -->
+    <view class="closet-page__empty" wx:if="{{!loading && clothingList.length === 0}}">
+      <view class="closet-page__empty-icon">👕</view>
+      <view class="closet-page__empty-text">衣橱还是空的，快去添加吧</view>
+      <button class="closet-page__empty-btn" bindtap="handleAddClothing">添加服饰</button>
+    </view>
+
+    <!-- 加载中/没有更多 -->
+    <view class="closet-page__footer" wx:if="{{clothingList.length > 0}}">
+      <text wx:if="{{loading}}">加载中...</text>
+      <text wx:elif="{{!hasMore}}">没有更多了</text>
+    </view>
+  </scroll-view>
+
+  <!-- 悬浮添加按钮 -->
+  <view class="closet-page__add-btn {{showBatchActions ? 'closet-page__add-btn--hide' : ''}}" bindtap="handleAddClothing">
+  </view>
+
+  <!-- 批量操作栏：改为 wx:if 物理控制，仅在需要时出现 -->
+  <view class="closet-page__batch-bar" wx:if="{{showBatchActions}}">
+    <view class="closet-page__batch-info">已选择 {{selectedIds.length}} 件</view>
+    <view class="closet-page__batch-actions">
+      <view class="closet-page__batch-btn closet-page__batch-btn--cancel" bindtap="cancelBatchSelect">取消</view>
+      <view class="closet-page__batch-btn closet-page__batch-btn--delete" bindtap="handleBatchDelete">删除</view>
+    </view>
+  </view>
+
+  <!-- 底部 Tab Bar -->
+  <tab-bar activeTab="closet" bindchange="handleTabChange" />
+</view>

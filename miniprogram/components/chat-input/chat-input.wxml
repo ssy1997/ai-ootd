@@ -1,0 +1,44 @@
+<!-- Chat Input 组件 - 回归版 -->
+<view class="chat-input">
+  <!-- 1. 快捷回复行 -->
+  <scroll-view 
+    class="chat-input__quick-scroll" 
+    scroll-x 
+    enable-flex 
+    show-scrollbar="{{false}}"
+  >
+    <view 
+      class="chat-input__quick-item" 
+      wx:for="{{quickReplies}}" 
+      wx:key="id"
+      bindtap="handleQuickReply"
+      data-text="{{item.text}}"
+      data-value="{{item.value}}"
+    >
+      {{item.text}}
+    </view>
+  </scroll-view>
+
+  <!-- 2. 主输入行：相机 + 输入框 + 发送 -->
+  <view class="chat-input__main">
+    <view class="chat-input__icon-btn" bindtap="handleImageSelect">
+      <image class="chat-input__icon" src="/images/icon-camera.svg" mode="aspectFit" />
+    </view>
+    
+    <view class="chat-input__box">
+      <input 
+        class="chat-input__field"
+        value="{{inputValue}}"
+        placeholder="{{placeholder}}"
+        disabled="{{disabled}}"
+        confirm-type="send"
+        bindinput="handleInput"
+        bindconfirm="handleSend"
+      />
+    </view>
+
+    <view class="chat-input__send-btn {{!inputValue.length || disabled ? 'chat-input__send-btn--disabled' : ''}}" bindtap="handleSend">
+      <image class="chat-input__icon chat-input__icon--send" src="/images/icon-send.svg" mode="aspectFit" />
+    </view>
+  </view>
+</view>

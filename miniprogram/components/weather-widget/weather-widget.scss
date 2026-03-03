@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+
+.weather-widget--minimal {
+  position: relative;
+  display: inline-flex; // 核心：改为内联弹性，根据内容自适应宽度
+  padding-left: 30rpx;  // 与页面左边距对齐
+  z-index: 1000;
+}
+
+.weather-widget__content {
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx; // 内部小边距，确保只比文本宽一点
+  gap: 8rpx;
+  background-color: #FFFFFF;
+  border-radius: 40rpx; // 胶囊圆角
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05); // 轻微悬浮阴影
+  border: 1rpx solid rgba(0, 0, 0, 0.02);
+}
+
+.weather-widget__item {
+  font-size: 22rpx;
+  color: #333;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.weather-widget__city {
+  color: #999;
+  font-weight: 400;
+}
+
+.weather-widget__divider {
+  color: #EEE;
+  font-size: 20rpx;
+}
+
+.weather-widget__icon {
+  margin-left: 6rpx;
+  font-size: 26rpx;
+}
