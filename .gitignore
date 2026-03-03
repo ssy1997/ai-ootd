@@ -9,3 +9,4 @@ project.private.config.json
 
 # Exclude root documentation
 /*.md
+!/README.md
