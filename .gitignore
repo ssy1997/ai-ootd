@@ -6,3 +6,6 @@ cloudfunctions/**/node_modules/
 project.private.config.json
 .env
 *.log
+
+# Exclude root documentation
+/*.md
